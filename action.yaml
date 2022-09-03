@@ -7,36 +7,34 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: echo "[Pull Request]($PR_URL)" >> "$GITHUB_STEP_SUMMARY"
-      shell: bash
-      env:
-        PR_URL: https://github.com/${{fromJSON(inputs.data).github.repository}}/pull/${{fromJSON(inputs.data).github.event.pull_request.number}}
-
     - shell: bash
       run: |
-        cat << 'EOS' | sed "s|PR_URL|$PR_URL|g" | sed "s|GITHUB_RUN_ID|$GITHUB_RUN_ID|g" >> "$GITHUB_STEP_SUMMARY"
+        cat << EOS >> "$GITHUB_STEP_SUMMARY"
+
+        [Pull Request]($PR_URL)
 
         ## How to rerun or cancel the Workflow and jobs
         
-        Please post a comment to the [Pull Request](PR_URL).
+        Please post a comment to the [Pull Request]($PR_URL).
 
         Rerun the workflow.
 
-        ```
-        /rerun-workflow GITHUB_RUN_ID
-        ```
+        $CODE_BLOCK
+        /rerun-workflow $GITHUB_RUN_ID
+        $CODE_BLOCK
 
         Rerun failed jobs.
 
-        ```
-        /rerun-failed-job GITHUB_RUN_ID
-        ```
+        $CODE_BLOCK
+        /rerun-failed-job $GITHUB_RUN_ID
+        $CODE_BLOCK
 
         Cancel the workflow.
 
-        ```
-        /cancel GITHUB_RUN_ID
-        ```
+        $CODE_BLOCK
+        /cancel $GITHUB_RUN_ID
+        $CODE_BLOCK
         EOS
       env:
-        PR_URL: https://github.com/${{fromJSON(inputs.data).github.repository}}/pull/${{fromJSON(inputs.data).github.event.pull_request.number}}
+        PR_URL: ${{fromJSON(inputs.data).event.pull_request.html_url}}
+        CODE_BLOCK: "```"
