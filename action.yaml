@@ -8,6 +8,7 @@ runs:
   using: composite
   steps:
     - shell: bash
+      if: fromJSON(inputs.data).event.pull_request.html_url
       run: |
         cat << EOS >> "$GITHUB_STEP_SUMMARY"
 
@@ -34,7 +35,64 @@ runs:
         $CODE_BLOCK
         /cancel $GITHUB_RUN_ID
         $CODE_BLOCK
+
+        Or you can also use [GitHub CLI](https://cli.github.com/manual/gh_run).
+
+        $CODE_BLOCK
+        gh run rerun -R $GITHUB_REPOSITORY $GITHUB_RUN_ID
+        $CODE_BLOCK
+
+        $CODE_BLOCK
+        gh run rerun -R $GITHUB_REPOSITORY --failed $GITHUB_RUN_ID
+        $CODE_BLOCK
+
+        $CODE_BLOCK
+        gh run cancel -R $GITHUB_REPOSITORY $GITHUB_RUN_ID
+        $CODE_BLOCK
         EOS
       env:
         PR_URL: ${{fromJSON(inputs.data).event.pull_request.html_url}}
+        CODE_BLOCK: "```"
+    - shell: bash
+      if: "! fromJSON(inputs.data).event.pull_request.html_url"
+      run: |
+        cat << EOS >> "$GITHUB_STEP_SUMMARY"
+
+        ## How to rerun or cancel the Workflow and jobs
+        
+        Please post a comment to any this repository's issue or pull request.
+
+        Rerun the workflow.
+
+        $CODE_BLOCK
+        /rerun-workflow $GITHUB_RUN_ID
+        $CODE_BLOCK
+
+        Rerun failed jobs.
+
+        $CODE_BLOCK
+        /rerun-failed-job $GITHUB_RUN_ID
+        $CODE_BLOCK
+
+        Cancel the workflow.
+
+        $CODE_BLOCK
+        /cancel $GITHUB_RUN_ID
+        $CODE_BLOCK
+
+        Or you can also use [GitHub CLI](https://cli.github.com/manual/gh_run).
+
+        $CODE_BLOCK
+        gh run rerun -R $GITHUB_REPOSITORY $GITHUB_RUN_ID
+        $CODE_BLOCK
+
+        $CODE_BLOCK
+        gh run rerun -R $GITHUB_REPOSITORY --failed $GITHUB_RUN_ID
+        $CODE_BLOCK
+
+        $CODE_BLOCK
+        gh run cancel -R $GITHUB_REPOSITORY $GITHUB_RUN_ID
+        $CODE_BLOCK
+        EOS
+      env:
         CODE_BLOCK: "```"
