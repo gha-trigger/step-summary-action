@@ -35,20 +35,6 @@ runs:
         $CODE_BLOCK
         /cancel $GITHUB_RUN_ID
         $CODE_BLOCK
-
-        Or you can also use [GitHub CLI](https://cli.github.com/manual/gh_run).
-
-        $CODE_BLOCK
-        gh run rerun -R $GITHUB_REPOSITORY $GITHUB_RUN_ID
-        $CODE_BLOCK
-
-        $CODE_BLOCK
-        gh run rerun -R $GITHUB_REPOSITORY --failed $GITHUB_RUN_ID
-        $CODE_BLOCK
-
-        $CODE_BLOCK
-        gh run cancel -R $GITHUB_REPOSITORY $GITHUB_RUN_ID
-        $CODE_BLOCK
         EOS
       env:
         PR_URL: ${{fromJSON(inputs.data).event.pull_request.html_url}}
@@ -78,20 +64,6 @@ runs:
 
         $CODE_BLOCK
         /cancel $GITHUB_RUN_ID
-        $CODE_BLOCK
-
-        Or you can also use [GitHub CLI](https://cli.github.com/manual/gh_run).
-
-        $CODE_BLOCK
-        gh run rerun -R $GITHUB_REPOSITORY $GITHUB_RUN_ID
-        $CODE_BLOCK
-
-        $CODE_BLOCK
-        gh run rerun -R $GITHUB_REPOSITORY --failed $GITHUB_RUN_ID
-        $CODE_BLOCK
-
-        $CODE_BLOCK
-        gh run cancel -R $GITHUB_REPOSITORY $GITHUB_RUN_ID
         $CODE_BLOCK
         EOS
       env:
