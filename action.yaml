@@ -8,9 +8,6 @@ runs:
   using: composite
   steps:
     - shell: bash
-      run: |
-        echo "::notice title=How to cancel the workflow::/cancel $GITHUB_RUN_ID"
-    - shell: bash
       if: fromJSON(inputs.data).event.pull_request.html_url
       run: |
         cat << EOS >> "$GITHUB_STEP_SUMMARY"
