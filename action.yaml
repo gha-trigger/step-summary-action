@@ -18,6 +18,23 @@ runs:
         
         Please post a comment to the [Pull Request]($PR_URL).
 
+        Rerun the workflow.
+
+        $CODE_BLOCK
+        /rerun-workflow $GITHUB_RUN_ID
+        $CODE_BLOCK
+
+        Rerun failed jobs.
+
+        $CODE_BLOCK
+        /rerun-failed-job $GITHUB_RUN_ID
+        $CODE_BLOCK
+
+        Cancel the workflow.
+
+        $CODE_BLOCK
+        /cancel $GITHUB_RUN_ID
+        $CODE_BLOCK
         EOS
       env:
         PR_URL: ${{fromJSON(inputs.data).event.pull_request.html_url}}
@@ -30,13 +47,6 @@ runs:
         ## How to rerun or cancel the Workflow and jobs
         
         Please post a comment to any this repository's issue or pull request.
-
-        EOS
-      env:
-        CODE_BLOCK: "```"
-    - shell: bash
-      run: |
-        cat << EOS >> "$GITHUB_STEP_SUMMARY"
 
         Rerun the workflow.
 
