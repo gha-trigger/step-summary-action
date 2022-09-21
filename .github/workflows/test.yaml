@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  test-pull-request:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,6 +22,10 @@ jobs:
                 }
               }
             }
+  test-non-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - name: Test non pull request
         uses: ./
         with:
