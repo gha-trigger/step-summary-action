@@ -1,0 +1,29 @@
+name: test
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test pull request
+        uses: ./
+        with:
+          data: |
+            {
+              "event": {
+                "pull_request": {
+                  "html_url": "https://github.com/gha-trigger/step-summary-action/pull/9"
+                }
+              }
+            }
+      - name: Test non pull request
+        uses: ./
+        with:
+          data: |
+            {}

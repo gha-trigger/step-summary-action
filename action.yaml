@@ -15,7 +15,7 @@ runs:
         [Pull Request]($PR_URL)
 
         ## How to rerun or cancel the Workflow and jobs
-        
+
         Please post a comment to the [Pull Request]($PR_URL).
 
         Rerun the workflow.
@@ -45,7 +45,7 @@ runs:
         cat << EOS >> "$GITHUB_STEP_SUMMARY"
 
         ## How to rerun or cancel the Workflow and jobs
-        
+
         Please post a comment to any this repository's issue or pull request.
 
         Rerun the workflow.
