@@ -10,7 +10,7 @@ jobs:
   test-pull-request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
       - name: Test pull request
         uses: ./
         with:
@@ -25,7 +25,7 @@ jobs:
   test-non-pull-request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
       - name: Test non pull request
         uses: ./
         with:
